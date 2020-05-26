@@ -20,7 +20,7 @@ grails {
             password.algorithm = 'MD5'
             securityConfigType = "InterceptUrlMap"
             adh.errorPage = null //null out so it can be custom
-            logout.handlerNames = ['rememberMeServices', 'nineLogoutHandler']
+            logout.handlerNames = ['rememberMeServices', 'rallyLogoutHandler']
 
             //events
             useSecurityEventListener = true

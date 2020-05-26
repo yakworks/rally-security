@@ -27,11 +27,6 @@ class SecRoleUser implements Serializable {
         this.user.name
     }
 
-    //We need Id for exporting to xls
-    String getId() {
-        "u${this.user.id}r${this.role.id}"
-    }
-
     @CompileDynamic
     static List<SecRoleUser> getByUser(long userId) {
         SecRoleUser.createCriteria().list {
