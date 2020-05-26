@@ -17,7 +17,6 @@ dependencies {
 
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
-
 }
 
 bootRepackage.enabled = false

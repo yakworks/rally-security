@@ -1,65 +1,70 @@
 buildscript {
-    repositories {
-        mavenLocal()
-        maven { url "https://repo.grails.org/grails/core" }
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
+  repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
 
-    dependencies {
-        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "org.yakworks:gradle-plugins:1.1.3"
-    }
+  dependencies {
+    classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+    classpath "org.yakworks:gradle-plugins:1.1.3"
+  }
 }
 
 apply plugin: 'yakworks.shipyak'
 
 repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-    maven { url "http://repo.9ci.com/oss-snapshots" }
+  mavenLocal()
+  maven { url "https://repo.grails.org/grails/core" }
+  maven { url "http://repo.9ci.com/oss-snapshots" }
 }
 
 subprojects {
-    plugins.withId('java') {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+  plugins.withId('java') {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 
-        repositories {
-            mavenLocal()
-            maven { url "https://repo.grails.org/grails/core" }
-            maven { url "http://repo.9ci.com/oss-snapshots" }
-        }
+    repositories {
+      mavenLocal()
+      maven { url "https://repo.grails.org/grails/core" }
+      maven { url "http://repo.9ci.com/oss-snapshots" }
+    }
 
-        dependencies {
-            compile "org.springframework.boot:spring-boot-starter-logging"
-            compile "org.springframework.boot:spring-boot-autoconfigure"
-            compile "org.grails:grails-core"
-            compile "org.springframework.boot:spring-boot-starter-actuator"
-            compile "org.springframework.boot:spring-boot-starter-tomcat"
-            compile "org.grails:grails-web-boot"
-            compile "org.grails:grails-logging"
+    dependencies {
+      compile "org.springframework.boot:spring-boot-starter-logging"
+      compile "org.springframework.boot:spring-boot-autoconfigure"
+      compile "org.grails:grails-core"
+      compile "org.springframework.boot:spring-boot-starter-actuator"
+      compile "org.springframework.boot:spring-boot-starter-tomcat"
+      compile "org.grails:grails-web-boot"
+      compile "org.grails:grails-logging"
 
-            compile "org.grails:grails-plugin-databinding"
-            compile "org.grails:grails-plugin-i18n"
-            compile "org.grails:grails-plugin-services"
-            compile "org.grails:grails-plugin-url-mappings"
-            compile "org.grails:grails-plugin-interceptors"
-            compile "org.grails.plugins:cache"
+      compile "org.grails:grails-plugin-databinding"
+      compile "org.grails:grails-plugin-i18n"
+      compile "org.grails:grails-plugin-services"
+      compile "org.grails:grails-plugin-url-mappings"
+      compile "org.grails:grails-plugin-interceptors"
+      compile "org.grails.plugins:cache"
 
-            testRuntime "org.apache.tomcat:tomcat-jdbc"
-            testCompile "org.grails:grails-gorm-testing-support"
-            testCompile "org.grails:grails-plugin-testing"
-            testCompile "org.grails:grails-web-testing-support"
-            testCompile "org.grails.plugins:build-test-data:3.3.+"
+      //for rally.security.testing.helper classes
+      compileOnly "org.grails:grails-gorm-testing-support"
+      compileOnly "org.grails.plugins:build-test-data:3.3.+"
 
-            testRuntime "com.h2database:h2"
+      testRuntime "org.apache.tomcat:tomcat-jdbc"
+      testCompile "org.grails:grails-gorm-testing-support"
+      testCompile "org.grails:grails-plugin-testing"
+      testCompile "org.grails:grails-web-testing-support"
+      testCompile "org.grails.plugins:build-test-data:3.3.+"
+      testCompile "org.grails:views-json-testing-support:$versionViews"
 
-        }
-
-        test {
-            testLogging.exceptionFormat = 'full'
-        }
+      testRuntime "com.h2database:h2"
 
     }
+
+    test {
+      testLogging.exceptionFormat = 'full'
+    }
+
+  }
 
 }
