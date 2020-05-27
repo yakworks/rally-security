@@ -19,6 +19,8 @@ class BootStrap {
 
             SecRole admin = SecRole.create([name: SecRole.ADMINISTRATOR])
             SecRole power = SecRole.create([name: SecRole.POWER_USER])
+            SecRole guest = SecRole.create([name: "Guest"])
+
             SecRoleUser.create(user, admin, true)
 
             assert admin.id == 1
