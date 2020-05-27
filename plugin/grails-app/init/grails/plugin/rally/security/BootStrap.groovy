@@ -20,6 +20,8 @@ class BootStrap {
             assert admin.id == 1
             assert power.id == 2
             assert guest.id == 3
+
+            SecRoleUser.create(user, admin, true)
         }
     }
     def destroy = {

@@ -8,6 +8,7 @@ import grails.plugin.springsecurity.userdetails.GrailsUserDetailsService
 import groovy.transform.CompileDynamic
 import groovy.util.logging.Slf4j
 import grails.plugin.rally.security.User
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -16,7 +17,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 @GrailsCompileStatic
 class RallyUserDetailsService implements GrailsUserDetailsService, GrailsApplicationAware {
     GrailsApplication grailsApplication
+
+    @Value('${grails.plugin.rally.security.password.expireDays:30}')
     int passwordExpireDays
+
+    @Value('${grails.plugin.rally.security.password.expireEnabled:false}')
     boolean passwordExpireEnabled
 
     @CompileDynamic
@@ -52,11 +57,7 @@ class RallyUserDetailsService implements GrailsUserDetailsService, GrailsApplica
 
     }
 
-    /**
-     * {@inheritDoc}
-     * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(
-     * java.lang.String )
-     */
+    @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.debug "loadUserByName(${username})"
         loadUserByUsername username, true

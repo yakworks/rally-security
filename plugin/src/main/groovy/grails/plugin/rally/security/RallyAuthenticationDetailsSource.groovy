@@ -5,11 +5,11 @@ import org.springframework.security.authentication.AuthenticationDetailsSource
 
 import javax.servlet.http.HttpServletRequest
 
-//Custom authentication source to create NineAuthenticationDetails - we need this to support autologin (/login/autoLogin)
+//Custom authentication source to create RallyAuthenticationDetails - we need this to support autologin (/login/autoLogin)
 @CompileStatic
 class RallyAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, RallyAuthenticationDetails> {
 
-//  @Override
+    @Override
     RallyAuthenticationDetails buildDetails(HttpServletRequest request) {
         return new RallyAuthenticationDetails(request)
     }

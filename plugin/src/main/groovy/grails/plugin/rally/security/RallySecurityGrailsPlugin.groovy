@@ -13,6 +13,8 @@ class RallySecurityGrailsPlugin extends Plugin {
 
     def documentation = "http://grails.org/plugin/rally-security"
 
+    def loadAfter = ['spring-security-core', 'spring-security-ldap', 'gorm-tools', 'datasource']
+
     Closure doWithSpring() {
         { ->
             def securityConf = SpringSecurityUtils.securityConfig
@@ -26,7 +28,6 @@ class RallySecurityGrailsPlugin extends Plugin {
                     bean.autowire = "byName"
                 }
                 rallyLogoutHandler(RallyLogoutHandler)
-
                 authenticationDetailsSource(RallyAuthenticationDetailsSource)
             }
         }

@@ -7,6 +7,7 @@ import grails.plugin.rally.security.User
 import grails.plugin.rally.security.UserService
 import org.grails.web.servlet.mvc.GrailsWebRequest
 import org.grails.web.util.WebUtils
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.ApplicationListener
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent
@@ -15,14 +16,15 @@ import org.springframework.security.authentication.event.InteractiveAuthenticati
 /**
  * Springsecurity login handler
  * tracks user logins and sets flag if password expiry warning should be displayed.
- *
  */
 @CompileStatic
 class RallyLoginHandler implements ApplicationListener<AbstractAuthenticationEvent> {
     UserService userService
-    SecService secService
 
+    @Value('${grails.plugin.rally.security.password.expireEnabled:false}')
     boolean passwordExpiryEnabled
+
+    @Value('${grails.plugin.rally.security.password.warnDays:30}')
     int passwordWarnDays
 
     void onApplicationEvent(AbstractAuthenticationEvent event) {

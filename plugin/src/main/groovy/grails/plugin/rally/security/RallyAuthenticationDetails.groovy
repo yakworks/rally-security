@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
  *
  * We mainly need this to support autoLogin (/login/autoLogin).
  * In the case of autologin, presented password is hash and should not be encrypted again when verifying passwords.
- * In the case of a regular form login, presented password will be encrypted before verifying password. @See NineAuthenticationProvider
+ * In the case of a regular form login, presented password will be encrypted before verifying password. @See RallyAuthenticationProvider
  *
  * @see RallyAuthenticationDetails#authType
  * @see RallyAuthenticationDetails#isAutoLogin

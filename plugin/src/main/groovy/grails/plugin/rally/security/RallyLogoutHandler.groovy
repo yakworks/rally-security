@@ -8,14 +8,15 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-//This is here to track users logout and can probably go away
+/**
+ * Tracks user logout
+ */
 @CompileDynamic
 class RallyLogoutHandler extends SecurityContextLogoutHandler {
 
     @Override
-    public void logout(
-            final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) {
-        def userService = Holders.grailsApplication.mainContext.getBean('userService')
+    void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        UserService userService = Holders.grailsApplication.mainContext.getBean('userService')
         if (authentication) {
             userService.trackUserLogout()
         }
