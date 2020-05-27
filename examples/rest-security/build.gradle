@@ -25,12 +25,11 @@ dependencies {
     exclude(group:"com.google.guava") //conflicts with grails
   }
 
-
   runtime "com.h2database:h2"
   runtime "org.apache.tomcat:tomcat-jdbc"
   compile "org.grails:grails-plugin-services"
   compile "org.grails:grails-plugin-domain-class"
-
+  testCompile "io.micronaut:micronaut-http-client:1.3.5"
 }
 
 //SEE README in root project
