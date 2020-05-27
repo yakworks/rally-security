@@ -1,0 +1,48 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+  }
+  dependencies {
+    classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+  }
+}
+
+version "0.1"
+group "demoapp"
+
+apply plugin: 'groovy'
+apply plugin: "war"
+apply plugin: "org.grails.grails-web"
+apply plugin: "org.grails.grails-gsp"
+
+dependencies {
+  profile "org.grails.profiles:web"
+  compile "org.grails.plugins:gsp"
+  compile "org.grails:grails-plugin-rest"
+
+  compile("org.grails.plugins:spring-security-rest:2.0.0.M2") {
+    exclude(group:"com.google.guava") //conflicts with grails
+  }
+
+
+  runtime "com.h2database:h2"
+  runtime "org.apache.tomcat:tomcat-jdbc"
+  compile "org.grails:grails-plugin-services"
+  compile "org.grails:grails-plugin-domain-class"
+
+}
+
+//SEE README in root project
+compileGroovy {
+  groovyOptions.fork = true
+  String path = projectDir.absolutePath
+  groovyOptions.forkOptions.jvmArgs = ['-Dmodule.path=' + path]
+}
+
+grails {
+  exploded = true
+  plugins {
+    compile project(':rally-security')
+  }
+}

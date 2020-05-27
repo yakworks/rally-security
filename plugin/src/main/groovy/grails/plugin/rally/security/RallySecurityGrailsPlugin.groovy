@@ -13,13 +13,15 @@ class RallySecurityGrailsPlugin extends Plugin {
 
     def documentation = "http://grails.org/plugin/rally-security"
 
-    def loadAfter = ['spring-security-core', 'spring-security-ldap', 'gorm-tools', 'datasource']
+    def loadAfter = ['spring-security-core', 'spring-security-ldap', 'spring-security-rest', 'gorm-tools', 'datasource']
 
     Closure doWithSpring() {
         { ->
             def securityConf = SpringSecurityUtils.securityConfig
             if (securityConf.active) {
-                passwordValidator(PasswordValidator)
+                passwordValidator(PasswordValidator){ bean ->
+                    bean.autowire = "byName"
+                }
                 passwordEncoder(grails.plugin.springsecurity.authentication.encoding.BCryptPasswordEncoder, 10)
 
                 userDetailsService(RallyUserDetailsService)
