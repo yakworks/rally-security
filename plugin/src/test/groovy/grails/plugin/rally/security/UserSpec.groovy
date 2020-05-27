@@ -7,7 +7,6 @@ import grails.plugin.rally.security.testing.SecuritySpecUnitTestHelper
 import org.apache.commons.lang.RandomStringUtils
 
 class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHelper {
-    SecService secService
 
     List<Class> getDomainClasses() { [User, SecRole, SecRoleUser] }
 
