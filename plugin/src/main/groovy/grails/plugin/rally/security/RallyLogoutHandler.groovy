@@ -1,12 +1,18 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
-
-import grails.util.Holders
-import groovy.transform.CompileDynamic
-import org.springframework.security.core.Authentication
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+
+import groovy.transform.CompileDynamic
+
+import org.springframework.security.core.Authentication
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
+
+import grails.util.Holders
 
 /**
  * Tracks user logout

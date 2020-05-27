@@ -1,10 +1,15 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
+
+import javax.servlet.http.HttpServletRequest
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j
-import org.springframework.security.web.authentication.WebAuthenticationDetails
 
-import javax.servlet.http.HttpServletRequest
+import org.springframework.security.web.authentication.WebAuthenticationDetails
 
 /**
  * Authentication details that stores sources where this authentication comes from.

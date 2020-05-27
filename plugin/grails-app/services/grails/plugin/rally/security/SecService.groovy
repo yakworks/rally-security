@@ -1,17 +1,22 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
 
-import grails.compiler.GrailsCompileStatic
-import grails.orm.HibernateCriteriaBuilder
-import grails.plugin.springsecurity.SpringSecurityService
-import grails.plugin.springsecurity.SpringSecurityUtils
-import grails.plugin.springsecurity.userdetails.GrailsUser
 import groovy.transform.CompileDynamic
+
 import org.springframework.security.authentication.AuthenticationTrustResolver
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
+
+import grails.compiler.GrailsCompileStatic
+import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.userdetails.GrailsUser
 
 /**
  * A wrapper around the key methods in springSecurityService.
@@ -166,14 +171,6 @@ class SecService {
         List<GrantedAuthority> authorities = parseAuthoritiesString([SecRole.ADMINISTRATOR] as String[])
         GrailsUser grailsUser = new GrailsUser(user.login, user.passwd, user.enabled, true, !user.mustChangePassword, true, authorities, user.id)
         SecurityContextHolder.context.authentication = new UsernamePasswordAuthenticationToken(grailsUser, user.passwd, authorities)
-    }
-
-    /**
-     * Just a wrapper around ifAllGranted(SecRole.Branch), checks if logged in user has role Branch
-     * @return boolean
-     */
-    boolean isBranchLogin() {
-        return ifAllGranted(SecRole.BRANCH)
     }
 
 }

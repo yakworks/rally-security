@@ -26,6 +26,11 @@ bootRun {
     addResources = true
 }
 
+codenarcIntegrationTest {
+  exclude '**/*'
+  ignoreFailures = true
+}
+
 //SEE README in root project
 compileGroovy {
     groovyOptions.fork = true

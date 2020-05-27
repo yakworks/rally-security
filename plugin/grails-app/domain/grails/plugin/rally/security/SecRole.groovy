@@ -1,7 +1,12 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
 
-import grails.compiler.GrailsCompileStatic
 import groovy.transform.EqualsAndHashCode
+
+import grails.compiler.GrailsCompileStatic
 
 /**
  * SecRole class for Authority.
@@ -10,28 +15,8 @@ import groovy.transform.EqualsAndHashCode
 @GrailsCompileStatic
 class SecRole implements Serializable {
 
-    // enabled by default in base data
     static final String ADMINISTRATOR = "Administrator" //full access, system user
     static final String POWER_USER = "Power User"
-    //default user, access to all the screens, not manager (cannot approve, view other's tasks or delete cash system data)
-    static final String MANAGER = "Manager" //access to all user's tasks, approval, can delete cash system data
-    static final String GUEST = "Guest" //read only
-    static final String CUSTOMER = "Customer" //greenbill single customer user
-
-    // disabled by default in base data, more speific roles
-    static final String COLLECTIONS = "Collections" //non cash
-    static final String COLLECTIONS_MANAGER = "Collections Manager"  //can see other collector tasks, approvals
-
-    static final String AUTOCASH = "Autocash" //cash, cannot delete system data
-    static final String AUTOCASH_MANAGER = "Autocash Manager" //cash, can delete system data
-    static final String AUTOCASH_OFFSET = "Autocash Offset" //cash, can only do $0 payments
-
-    static final String ADMIN_CONFIG = "Admin Config" //setup
-    static final String ADMIN_SEC = "Admin Sec" //user sec. management (acl)
-
-    static final String SALES = "Sales" //review, approve disputes
-    static final String BRANCH = "Branch"
-    //branch, store user with limited access to customer and transaction screen only.
 
     Boolean inactive = false
 

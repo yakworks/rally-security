@@ -1,7 +1,11 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
 
 import grails.plugin.springsecurity.SpringSecurityUtils
-import grails.plugins.*
+import grails.plugins.Plugin
 
 class RallySecurityGrailsPlugin extends Plugin {
     def grailsVersion = "3.3.10 > *"

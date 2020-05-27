@@ -1,5 +1,8 @@
 package yakworks
 
+import groovy.transform.CompileDynamic
+
+@CompileDynamic
 class UrlMappings {
 
     static mappings = {

@@ -1,11 +1,17 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
+
+import groovy.time.TimeCategory
+import groovy.transform.CompileDynamic
+
+import org.grails.datastore.mapping.query.api.Criteria
 
 import grails.compiler.GrailsCompileStatic
 import grails.core.GrailsApplication
 import grails.gorm.transactions.Transactional
-import groovy.time.TimeCategory
-import groovy.transform.CompileDynamic
-import org.grails.datastore.mapping.query.api.Criteria
 
 /**
  * UserService is for user level helpers, such as sending emails to user,
@@ -23,7 +29,6 @@ class UserService {
     PasswordValidator passwordValidator
 
     GrailsApplication grailsApplication
-
 
     /**
      * Create new record in secLoginHistory with logged in user and date
@@ -57,7 +62,6 @@ class UserService {
     Map validatePassword(User user, String pass, String passConfirm) {
         return passwordValidator.validate(user, pass, passConfirm)
     }
-
 
     String generateResetPasswordToken(User user) {
         String token = UUID.randomUUID().toString().replaceAll('-', '')

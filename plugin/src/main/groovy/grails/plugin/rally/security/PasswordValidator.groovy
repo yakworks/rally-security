@@ -1,14 +1,18 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
 
-import grails.gorm.transactions.Transactional
-import grails.plugin.rally.security.SecPasswordHistory
-import grails.plugin.rally.security.User
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
+
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.security.authentication.encoding.PasswordEncoder
+
+import grails.gorm.transactions.Transactional
 
 @CompileStatic
 class PasswordValidator {
@@ -41,6 +45,7 @@ class PasswordValidator {
         messageSource.getMessage(key, args as Object[], key, LocaleContextHolder.locale)
     }
 
+    @SuppressWarnings(['IfStatementCouldBeTernary'])
     Map validate(User user, String pass, String passConfirm) {
         if (!pass || (pass.length() < passwordMinLength)) {
             return [ok: false, message: message("rally.security.password.minlength", passwordMinLength)]

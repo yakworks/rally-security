@@ -1,17 +1,22 @@
+/*
+* Copyright 2020 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.rally.security
+
+import groovy.transform.CompileDynamic
+import groovy.util.logging.Slf4j
+
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 
 import grails.compiler.GrailsCompileStatic
 import grails.core.GrailsApplication
 import grails.core.support.GrailsApplicationAware
 import grails.plugin.springsecurity.userdetails.GrailsUser
 import grails.plugin.springsecurity.userdetails.GrailsUserDetailsService
-import groovy.transform.CompileDynamic
-import groovy.util.logging.Slf4j
-import grails.plugin.rally.security.User
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 
 @Slf4j
 @GrailsCompileStatic
