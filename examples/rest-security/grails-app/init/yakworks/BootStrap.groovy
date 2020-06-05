@@ -1,12 +1,12 @@
 package yakworks
 
-import grails.plugin.rally.security.User
+import grails.plugin.rally.security.BaseUser
 
 class BootStrap {
 
     def init = { servletContext ->
-       if(!User.findByLogin("admin")) {
-           User user = new User()
+       if(!BaseUser.findByLogin("admin")) {
+           BaseUser user = new BaseUser()
            user.login = "admin"
            user.email = "admin@9ci.com"
            user.name = "Admin"

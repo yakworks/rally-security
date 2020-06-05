@@ -6,9 +6,9 @@ import gorm.tools.testing.hibernate.AutoHibernateSpec
 import grails.plugin.rally.security.testing.SecuritySpecUnitTestHelper
 import org.apache.commons.lang.RandomStringUtils
 
-class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHelper {
+class UserSpec extends AutoHibernateSpec<BaseUser> implements SecuritySpecUnitTestHelper {
 
-    List<Class> getDomainClasses() { [User, SecRole, SecRoleUser] }
+    List<Class> getDomainClasses() { [BaseUser, SecRole, SecRoleUser] }
 
     String genRandomEmail(){
         String ename = RandomStringUtils.randomAlphabetic(10)
@@ -26,11 +26,11 @@ class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHe
     }
 
     @Override
-    User createEntity(Map args){
-        entity = new User()
+    BaseUser createEntity(Map args){
+        entity = new BaseUser()
         args = buildMap(args)
         args << [password:'secretStuff', repassword:'secretStuff']
-        entity = User.create(args)
+        entity = BaseUser.create(args)
         //We have to add 'passwd' field manually, because it has the "bindable: false" constraint
         entity.passwd = 'test_pass_123'
         entity.persist()
@@ -39,7 +39,7 @@ class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHe
     }
 
     @Override
-    User persistEntity(Map args){
+    BaseUser persistEntity(Map args){
         args.get('save', false) //adds save:false if it doesn't exists
         args['passwd'] = "test"
         entity = build(buildMap(args))
@@ -49,9 +49,9 @@ class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHe
 
     def "test update fail"() {
         when:
-        User user = createEntity()
+        BaseUser user = createEntity()
         Map params = [id: user.id, login: null]
-        User.update(params)
+        BaseUser.update(params)
 
         then:
         thrown EntityValidationException
@@ -73,7 +73,7 @@ class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHe
         Map data = buildMap([:])
         data.roles = ["1", "2"]
         data << [password:'secretStuff', repassword:'secretStuff']
-        User user = User.create(data)
+        BaseUser user = BaseUser.create(data)
         flush()
 
         then:
@@ -86,7 +86,7 @@ class UserSpec extends AutoHibernateSpec<User> implements SecuritySpecUnitTestHe
         when:
         Map data = buildMap([:])
         data << [password:'secretStuff', repassword:'secretStuff']
-        User user = User.create(data)
+        BaseUser user = BaseUser.create(data)
         flush()
 
         then:

@@ -11,8 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder
 
+import grails.plugin.rally.security.BaseUser
 import grails.plugin.rally.security.SecService
-import grails.plugin.rally.security.User
 import grails.plugin.springsecurity.userdetails.GrailsUser
 import grails.testing.spock.OnceBefore
 
@@ -27,7 +27,7 @@ trait SecuritySpecHelper {
         secService.loginAsSystemUser()
     }
 
-    void authenticate(User user, String... roles) {
+    void authenticate(BaseUser user, String... roles) {
         roles = roles.collect { "ROLE_" + it}
         List authorities = AuthorityUtils.createAuthorityList(roles)
 

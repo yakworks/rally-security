@@ -4,13 +4,12 @@ import gorm.tools.testing.integration.DataIntegrationTest
 import grails.plugin.rally.security.testing.SecuritySpecHelper
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
-import spock.lang.IgnoreRest
 import spock.lang.Specification
 
 @Integration
 @Rollback
 class UserRepoSpec extends Specification implements DataIntegrationTest, SecuritySpecHelper {
-    UserRepo userRepo
+    BaseUserRepo baseUserRepo
 
     Map getUserParams(params = [:]){
         return ([
@@ -27,16 +26,16 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
 
     def testRemove() {
         setup:
-        User user = userRepo.create(getUserParams())
+        BaseUser user = baseUserRepo.create(getUserParams())
 
         expect:
-        User.get(user.id) != null
+        BaseUser.get(user.id) != null
 
         when:
-        userRepo.remove(user)
+        baseUserRepo.remove(user)
 
         then:
-        User.get(user.id) == null
+        BaseUser.get(user.id) == null
     }
 
     def testInsertWithRoles() {
@@ -44,14 +43,14 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
         Map params = getUserParams([roles: ["1", "2"]])
         params.remove 'id'
         params.remove 'version'
-        User res = userRepo.create(params)
+        BaseUser res = baseUserRepo.create(params)
         flushAndClear()
 
         then:
         res.id != null
 
         when:
-        User user = User.get(res.id)
+        BaseUser user = BaseUser.get(res.id)
 
         then:
         user.login == 'lll'
@@ -61,14 +60,14 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
     def testUpdateToAddRoles() {
         when:
         Map params = getUserParams([roles: ["1", "2"]])
-        User res = userRepo.update([:], params)
+        BaseUser res = baseUserRepo.update([:], params)
         flushAndClear()
 
         then:
         res.id != null
 
         when:
-        User user = User.get(1)
+        BaseUser user = BaseUser.get(1)
 
         then:
         user.login == 'lll'
@@ -80,7 +79,7 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
         Map params = getUserParams([roles: ["1", "2"]])
         params.remove 'id'
         params.remove 'version'
-        User user = userRepo.create(params)
+        BaseUser user = baseUserRepo.create(params)
         flushAndClear()
 
         expect:
@@ -88,7 +87,7 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
         SecRoleUser.get(user.id, 2)
 
         when:
-        userRepo.remove(user)
+        baseUserRepo.remove(user)
 
         then:
         !SecRoleUser.get(user.id, 1)
@@ -97,16 +96,16 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
 
     def testUpdateToReplaceRoles() {
         when:
-        SecRoleUser.findAllByUser(User.get(1))*.role.id == [1L]
+        SecRoleUser.findAllByUser(BaseUser.get(1))*.role.id == [1L]
         Map params = getUserParams([roles: ["2", "3"]])
-        User res = userRepo.update([:], params)
+        BaseUser res = baseUserRepo.update([:], params)
         flushAndClear()
 
         then:
         res.id != null
 
         when:
-        User user = User.get(1)
+        BaseUser user = BaseUser.get(1)
 
         then:
         user.login == 'lll'
@@ -114,7 +113,7 @@ class UserRepoSpec extends Specification implements DataIntegrationTest, Securit
     }
 
     /** printDiffs prints the pertinent params and final data for the test for debugging purposes. */
-    void printDiffs(Map params, User user, Map result) {
+    void printDiffs(Map params, BaseUser user, Map result) {
         println "          key                    params - result"
         def format = '    %7s.%-10s: %15s - %-15s\n'
         printf(format, 'user', 'login', params.login, user.login)

@@ -50,10 +50,10 @@ class RallyLoginHandler implements ApplicationListener<AbstractAuthenticationEve
 
     boolean shouldWarnAboutPasswordExpiry(GrailsUser principal) {
         boolean result = false
-        User.withTransaction {
+        BaseUser.withTransaction {
             if (passwordExpiryEnabled) {
                 int warnBeforeDays = passwordWarnDays
-                int remainingDays = userService.remainingDaysForPasswordExpiry(User.get((Long) principal.id))
+                int remainingDays = userService.remainingDaysForPasswordExpiry(BaseUser.get((Long) principal.id))
                 if (warnBeforeDays >= remainingDays) result = true
             }
         }

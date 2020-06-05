@@ -13,14 +13,14 @@ class RallyUserDetailsServiceSpec extends Specification implements DataIntegrati
 
     void testLoadUserByUsername() {
         when:
-        User.repo.create([name:"Karen", login:"karen", password:"karen", repassword:"karen", email:"karen@9ci.com"])
+        BaseUser.repo.create([name:"Karen", login:"karen", password:"karen", repassword:"karen", email:"karen@9ci.com"])
         GrailsUser gUser = userDetailsService.loadUserByUsername('karen')
 
         then:
         gUser != null
 
         when:
-        User user = User.get(gUser.id)
+        BaseUser user = BaseUser.get(gUser.id)
 
         then:
         user.name== 'Karen'
@@ -29,7 +29,7 @@ class RallyUserDetailsServiceSpec extends Specification implements DataIntegrati
     void "test expired password"() {
         given:
         Date now = new Date()
-        User user = User.first()
+        BaseUser user = BaseUser.first()
         userDetailsService.passwordExpireEnabled = true
         userDetailsService.passwordExpireDays = 10
         user.mustChangePassword = true

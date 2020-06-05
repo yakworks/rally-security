@@ -32,8 +32,8 @@ class RallyUserDetailsService implements GrailsUserDetailsService, GrailsApplica
     @CompileDynamic
     UserDetails loadUserByUsername(String username, boolean loadRoles) throws UsernameNotFoundException {
         log.debug "loadUserByName(${username}, ${loadRoles})"
-        User.withTransaction { status ->
-            User user = User.findByLogin(username.trim())
+        BaseUser.withTransaction { status ->
+            BaseUser user = BaseUser.findByLogin(username.trim())
             if (!user) {
                 throw new UsernameNotFoundException("User not found: $username")
             }

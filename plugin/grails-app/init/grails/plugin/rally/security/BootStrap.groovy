@@ -10,8 +10,8 @@ import grails.compiler.GrailsCompileStatic
 class BootStrap {
 
     def init = { servletContext ->
-        User.withTransaction({
-            User user = new User(name: "admin", login: "admin", email: "admin@9ci.com")
+        BaseUser.withTransaction({
+            BaseUser user = new BaseUser(name: "admin", login: "admin", email: "admin@9ci.com")
             user.pass = "admin"
             user.encodePassword()
             user.persist()

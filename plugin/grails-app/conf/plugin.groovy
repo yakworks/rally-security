@@ -10,7 +10,7 @@ grails {
             userLookup.authorityJoinClassName = 'grails.plugin.rally.security.SecRoleUser'
             userLookup.enabledPropertyName = 'enabled'
             userLookup.passwordPropertyName = 'passwd'
-            userLookup.userDomainClassName = 'grails.plugin.rally.security.User'
+            userLookup.userDomainClassName = 'grails.plugin.rally.security.BaseUser'
             userLookup.usernamePropertyName = 'login'
             userLookup.accountExpiredPropertyName = null
             userLookup.accountLockedPropertyName = null

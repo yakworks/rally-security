@@ -68,8 +68,8 @@ class SecService {
      * calls same method on springSecurityService
      * @return the user
      */
-    User getUser() {
-        return (User) springSecurityService.getCurrentUser()
+    BaseUser getUser() {
+        return (BaseUser) springSecurityService.getCurrentUser()
     }
 
     /**
@@ -167,7 +167,7 @@ class SecService {
      * Mainly used in tests, to provide a security context.
      */
     static void loginAsSystemUser() {
-        User user = User.get(1)
+        BaseUser user = BaseUser.get(1)
         List<GrantedAuthority> authorities = parseAuthoritiesString([SecRole.ADMINISTRATOR] as String[])
         GrailsUser grailsUser = new GrailsUser(user.login, user.passwd, user.enabled, true, !user.mustChangePassword, true, authorities, user.id)
         SecurityContextHolder.context.authentication = new UsernamePasswordAuthenticationToken(grailsUser, user.passwd, authorities)

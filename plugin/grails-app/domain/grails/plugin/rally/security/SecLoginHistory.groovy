@@ -9,7 +9,7 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class SecLoginHistory implements Serializable {
 
-    User user
+    BaseUser user
     Date loginDate
     Date logoutDate
 

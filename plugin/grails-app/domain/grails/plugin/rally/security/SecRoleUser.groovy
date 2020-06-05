@@ -13,7 +13,7 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class SecRoleUser implements Serializable {
 
-    User user
+    BaseUser user
     SecRole role
 
     static transients = ['roleName', 'userName', 'id']
@@ -46,11 +46,11 @@ class SecRoleUser implements Serializable {
         find 'from SecRoleUser where user.id=:userId and role.id=:roleId', [userId: userId, roleId: roleId]
     }
 
-    static SecRoleUser create(User user, SecRole role, boolean flush = false) {
+    static SecRoleUser create(BaseUser user, SecRole role, boolean flush = false) {
         new SecRoleUser(user: user, role: role).save(flush: flush, insert: true)
     }
 
-    static boolean remove(User user, SecRole role, boolean flush = false) {
+    static boolean remove(BaseUser user, SecRole role, boolean flush = false) {
         SecRoleUser instance = SecRoleUser.findByUserAndRole(user, role)
         if (!instance) {
             return false
@@ -60,7 +60,7 @@ class SecRoleUser implements Serializable {
         true
     }
 
-    static void removeAll(User user) {
+    static void removeAll(BaseUser user) {
         executeUpdate 'DELETE FROM SecRoleUser WHERE user=:user', [user: user]
     }
 
@@ -69,7 +69,7 @@ class SecRoleUser implements Serializable {
     }
 
     @CompileDynamic
-    static getRoleMap(User userInstance) {
+    static getRoleMap(BaseUser userInstance) {
         List roles = SecRole.list()
         Set userRoleNames = []
         if (userInstance.id) {

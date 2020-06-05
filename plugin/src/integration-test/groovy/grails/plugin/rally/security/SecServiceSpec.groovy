@@ -13,7 +13,7 @@ public class SecServiceSpec extends Specification implements SecuritySpecHelper,
     SecService secService
 
     def setup() {
-        authenticate(User.get(1), SecRole.ADMINISTRATOR)
+        authenticate(BaseUser.get(1), SecRole.ADMINISTRATOR)
     }
 
     def testGetPrincipal() {
@@ -33,7 +33,7 @@ public class SecServiceSpec extends Specification implements SecuritySpecHelper,
 
     def testGetUser() {
         expect:
-        User.get(1) == secService.user
+        BaseUser.get(1) == secService.user
     }
 
     def testIsLoggedIn() {

@@ -8,7 +8,7 @@ import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
 class SecPasswordHistory {
-    static belongsTo = [user: User]
+    static belongsTo = [user: BaseUser]
     String password
 
     Date dateCreated
@@ -34,7 +34,7 @@ class SecPasswordHistory {
      * @param passwordHash
      * @return
      */
-    static SecPasswordHistory create(User user, String passwordHash) {
+    static SecPasswordHistory create(BaseUser user, String passwordHash) {
         Integer historyLength = 10//AppParam.value('passwordHistoryLength').toInteger()
         if (SecPasswordHistory.countByUser(user) >= historyLength) {
             SecPasswordHistory lastRecord = SecPasswordHistory.list(max: 1, sort: 'dateCreated', order: 'asc')[0]

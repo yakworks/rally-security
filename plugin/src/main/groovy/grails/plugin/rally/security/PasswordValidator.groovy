@@ -46,7 +46,7 @@ class PasswordValidator {
     }
 
     @SuppressWarnings(['IfStatementCouldBeTernary'])
-    Map validate(User user, String pass, String passConfirm) {
+    Map validate(BaseUser user, String pass, String passConfirm) {
         if (!pass || (pass.length() < passwordMinLength)) {
             return [ok: false, message: message("rally.security.password.minlength", passwordMinLength)]
         }
@@ -83,7 +83,7 @@ class PasswordValidator {
      */
     @CompileDynamic
     @Transactional(readOnly = true)
-    boolean passwordExistInHistory(User user, String password) {
+    boolean passwordExistInHistory(BaseUser user, String password) {
         List<SecPasswordHistory> passwordHistoryList = SecPasswordHistory.findAllByUser(user)
         passwordHistoryList.any { passwordEncoder.isPasswordValid(it.password, password, null) }
     }

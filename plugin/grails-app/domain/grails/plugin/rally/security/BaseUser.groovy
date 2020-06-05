@@ -14,7 +14,7 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='login', useCanEqual=false)
 @ToString(includes='login', includeNames=true, includePackage=false)
-class User implements Serializable {
+class BaseUser implements Serializable {
 
     static transients = ['pass', 'primaryRole', 'editedByName', 'org', 'enabled']
 
@@ -68,6 +68,6 @@ class User implements Serializable {
     }
 
     String getEditedByName() {
-        User.get(this.editedBy)?.name
+        BaseUser.get(this.editedBy)?.name
     }
 }

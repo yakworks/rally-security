@@ -17,14 +17,14 @@ import grails.gorm.transactions.Transactional
 
 @GrailsCompileStatic
 @Transactional
-class UserRepo implements GormRepo<User> {
+class BaseUserRepo implements GormRepo<BaseUser> {
     SecService secService
 
     /**
      * Event method called beforeRemove to get rid of the SecRoleUser.
      */
     @RepoListener
-    void beforeRemove(User user, BeforeRemoveEvent be) {
+    void beforeRemove(BaseUser user, BeforeRemoveEvent be) {
         SecRoleUser.removeAll(user)
     }
 
@@ -36,7 +36,7 @@ class UserRepo implements GormRepo<User> {
      * @param bindAction
      */
     @RepoListener
-    void afterBind(User user, Map p, AfterBindEvent ae) {
+    void afterBind(BaseUser user, Map p, AfterBindEvent ae) {
         String password = p['password'] as String
         String repeatedPassword = p['repassword'] as String
         List roles = p['roles'] as List
@@ -51,7 +51,7 @@ class UserRepo implements GormRepo<User> {
     /**
      * Adds roles to the user
      */
-    User addUserRole(User user, String role) {
+    BaseUser addUserRole(BaseUser user, String role) {
         SecRoleUser.create(user, SecRole.findByName(role))
         return user
     }
@@ -60,7 +60,7 @@ class UserRepo implements GormRepo<User> {
      * checks params to see if password exists, that is matches repassword and encodes it if so
      * finally setting it to the passwd field on User.
      */
-    private void doPassword(User user, String pass, String rePass){
+    private void doPassword(BaseUser user, String pass, String rePass){
         if(!pass?.trim()) return
         isSamePass(pass, rePass, user)
         user.passwd = encodePassword(pass)
@@ -73,7 +73,7 @@ class UserRepo implements GormRepo<User> {
 
     /** throws EntityValidationException if not. NOTE: keep the real pas**ord name out so scanners dont pick this up */
     @NotTransactional
-    void isSamePass(String pass, String rePass, User user) {
+    void isSamePass(String pass, String rePass, BaseUser user) {
         if (pass.trim() != rePass.trim()) {
             Map msg = RepoMessage.setup("password.mismatch", [0], "The passwords you entered do not match")
             throw new EntityValidationException(msg, user)
@@ -89,7 +89,7 @@ class UserRepo implements GormRepo<User> {
         List<Long> addition
 
         // Get the User instance
-        User user = User.get(userId)
+        BaseUser user = BaseUser.get(userId)
 
         // Compare existing role(s) with incoming
         if (existingRoles && incomeRoles) {
