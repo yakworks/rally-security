@@ -9,7 +9,7 @@ import grails.plugins.Plugin
 
 class RallySecurityGrailsPlugin extends Plugin {
     def grailsVersion = "3.3.10 > *"
-    def pluginExcludes = []
+
     def title = "Rally Security"
     def author = "Your name"
     def authorEmail = ""
@@ -18,6 +18,7 @@ class RallySecurityGrailsPlugin extends Plugin {
     def documentation = "http://grails.org/plugin/rally-security"
 
     def loadAfter = ['spring-security-core', 'spring-security-ldap', 'spring-security-rest', 'gorm-tools', 'datasource']
+    def pluginExcludes = ["**/init/**"]
 
     Closure doWithSpring() {
         { ->

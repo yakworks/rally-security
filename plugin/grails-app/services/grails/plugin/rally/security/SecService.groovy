@@ -163,7 +163,6 @@ class SecService {
     }
 
     /**
-     * Login user with role Client.
      * Mainly used in tests, to provide a security context.
      */
     static void loginAsSystemUser() {

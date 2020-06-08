@@ -37,3 +37,8 @@ compileGroovy {
     String path = projectDir.absolutePath
     groovyOptions.forkOptions.jvmArgs = ['-Dmodule.path=' + path]
 }
+
+//dont need to bundle up bootstrap
+jar {
+  exclude('grails/plugin/rally/security/init/**')
+}

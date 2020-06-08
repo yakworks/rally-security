@@ -11,7 +11,7 @@ class BootStrap {
         user.name = "Admin"
         user.pass = "admin"
         user.encodePassword()
-        user.persist()
+        user.persist(flush:true)
     }
 
 }
