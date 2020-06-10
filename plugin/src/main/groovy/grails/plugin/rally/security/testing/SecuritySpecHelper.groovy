@@ -7,6 +7,7 @@ package grails.plugin.rally.security.testing
 import groovy.transform.CompileDynamic
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder
@@ -19,6 +20,7 @@ import grails.testing.spock.OnceBefore
 @CompileDynamic
 trait SecuritySpecHelper {
     @Autowired
+    @Qualifier("secService")
     SecService secService
 
     //need to name it like this, otherwise subclasses cant use setupSpec method
