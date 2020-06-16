@@ -4,6 +4,8 @@
 */
 package grails.plugin.rally.security
 
+import javax.servlet.http.HttpSession
+
 import groovy.transform.CompileDynamic
 
 import org.grails.web.util.WebUtils
@@ -163,6 +165,18 @@ class SecService {
     List<String> getPrincipalRoles() {
         if (!isLoggedIn()) return []
         return user.roles*.name
+    }
+
+    /**
+     * Logout current user programmatically
+     */
+    void logout() {
+        HttpSession session = WebUtils.retrieveGrailsWebRequest().currentRequest.getSession(false)
+        if (session) {
+            session.invalidate()
+        }
+        SecurityContextHolder.context.setAuthentication(null)
+        SecurityContextHolder.clearContext()
     }
 
     /**
