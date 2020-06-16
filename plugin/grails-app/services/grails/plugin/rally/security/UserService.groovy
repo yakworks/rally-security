@@ -8,6 +8,7 @@ import groovy.time.TimeCategory
 import groovy.transform.CompileDynamic
 
 import org.grails.datastore.mapping.query.api.Criteria
+import org.springframework.beans.factory.annotation.Value
 
 import grails.compiler.GrailsCompileStatic
 import grails.core.GrailsApplication
@@ -22,13 +23,14 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class UserService {
 
+    @Value('${grails.plugin.rally.security.password.historyEnabled:false}')
     boolean passwordHistoryEnabled
+
+    @Value('${grails.plugin.rally.security.password.expireDays:90}')
     int passwordExpireDays
 
     SecService secService
     PasswordValidator passwordValidator
-
-    GrailsApplication grailsApplication
 
     /**
      * Create new record in secLoginHistory with logged in user and date
@@ -61,14 +63,6 @@ class UserService {
      */
     Map validatePassword(BaseUser user, String pass, String passConfirm) {
         return passwordValidator.validate(user, pass, passConfirm)
-    }
-
-    String generateResetPasswordToken(BaseUser user) {
-        String token = UUID.randomUUID().toString().replaceAll('-', '')
-        user.resetPasswordToken = token
-        user.resetPasswordDate = new Date()
-        user.save(flush: true)
-        return token
     }
 
     int remainingDaysForPasswordExpiry(BaseUser u = null) {

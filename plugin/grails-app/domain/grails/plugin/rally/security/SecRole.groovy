@@ -16,8 +16,6 @@ import grails.compiler.GrailsCompileStatic
 class SecRole implements Serializable {
 
     static final String ADMINISTRATOR = "Administrator" //full access, system user
-    static final String POWER_USER = "Power User"
-
     Boolean inactive = false
 
     String description
