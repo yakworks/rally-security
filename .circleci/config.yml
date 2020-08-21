@@ -25,12 +25,12 @@ jobs:
 
       - run:
           name: ✔︎ -- Downloads Dependencies [gradle resolveConfigurations]
-          command: gradle resolveConfigurations --no-daemon
+          command: ./gradlew resolveConfigurations --no-daemon
 
       # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
       - run:
           name: ✔︎ -- Compile [gradle classes]
-          command: gradle classes --no-daemon
+          command: ./gradlew classes --no-daemon
 
       - save_cache:
           paths: ["~/.m2", "~/.gradle"]
@@ -38,7 +38,7 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks Linter and Tests [gradle check]
-          command: gradle check --no-daemon
+          command: ./gradlew check --no-daemon
 
       - store_artifacts:
           path: plugin/build/reports/tests/test/

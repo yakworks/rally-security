@@ -23,8 +23,6 @@ dependencies {
   // compileOnly "org.grails.plugins:geb"
   // compileOnly "org.grails:grails-datastore-rest-client"
   // compileOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1" // needed for groovydoc
-
-
 }
 
 //bootRepackage and maybe addResources are needed for the test/example projects grails.plugin.compile dependency to work
