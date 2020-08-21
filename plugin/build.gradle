@@ -11,7 +11,7 @@ dependencies {
   console "org.grails:grails-console"
 
   compile "org.grails.plugins:spring-security-core:$vSpringSecurity"
-  compile "org.grails.plugins:spring-security-rest:$vSpringSecurityRest"
+  // compile "org.grails.plugins:spring-security-rest:$vSpringSecurityRest"
   compileOnly "org.grails.plugins:audit-trail:$vPluginAuditTrail"
 
   compileOnly "org.grails.plugins:gorm-tools:$vPluginGormTools"
@@ -37,14 +37,6 @@ bootRepackage.enabled = false
 test {
   //testLogging.showStandardStreams = true
   testLogging.exceptionFormat = 'full'
-}
-
-
-//SEE README in root project
-compileGroovy {
-    groovyOptions.fork = true
-    String path = projectDir.absolutePath
-    groovyOptions.forkOptions.jvmArgs = ['-Dmodule.path=' + path]
 }
 
 //dont need to bundle up bootstrap

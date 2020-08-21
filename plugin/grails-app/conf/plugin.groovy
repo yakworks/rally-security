@@ -29,6 +29,9 @@ grails {
                 def userService = appCtx.getBean('userService')
                 userService.trackUserLogin()
             }
+            rest {
+                token.storage.jwt.secret = 'sWXY3VMm4wKAGoRZg8r3ftZc'
+            }
         }
     }
 }

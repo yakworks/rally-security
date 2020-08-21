@@ -23,8 +23,6 @@ jobs:
           keys:
             - gradle-{{ checksum "cache-checksum.tmp" }}
 
-      # see https://github.com/palantir/gradle-configuration-resolver-plugin
-      # this also kind of helps with the memory issue we keep running into by breaking it up
       - run:
           name: ✔︎ -- Downloads Dependencies [gradle resolveConfigurations]
           command: gradle resolveConfigurations --no-daemon

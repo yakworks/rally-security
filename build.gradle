@@ -34,8 +34,10 @@ subprojects {
 
       compile "org.grails:grails-logging"
       compile "org.grails:grails-plugin-databinding"
-      compile "org.grails:grails-plugin-services"
+      compile "org.grails:grails-plugin-i18n"
       compile "org.grails:grails-plugin-interceptors"
+      // compile "org.grails:grails-plugin-rest"
+      compile "org.grails:grails-plugin-services"
       compile "org.grails.plugins:cache"
       compile "org.grails.plugins:events"
 
@@ -61,9 +63,9 @@ subprojects {
 
       configurations {
         testCompile.extendsFrom compileOnly //includes the compileOnly in tests too so we don't have to list twice
-        all {
-          resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
-        }
+        // all {
+        //   resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
+        // }
       }
 
       //sets the path to sys properties so we can use it find grails-app/conf during AST
