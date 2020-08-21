@@ -8,7 +8,7 @@ github:
   fullName: yakworks/rally-security
 
 team:
-  developers: ['snimavat: Sudhir Nimavat']
+  developers: ['basejump: Joshua Burnett', 'snimavat: Sudhir Nimavat']
 
 bintray:
   enabled: true
@@ -21,3 +21,7 @@ bintray:
 maven:
   # repoUrl: http://repo.9ci.com/grails-plugins
   snapshotUrl: http://repo.9ci.com/oss-snapshots
+
+codenarc:
+  main:
+    excludes: ['**/BootStrap.*', '**/UrlMappings.*']

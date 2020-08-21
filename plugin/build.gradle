@@ -1,41 +1,44 @@
+apply plugin: "yakworks.grails-plugin"
+//apply plugin: "jacoco"
 
-apply plugin: "groovy"
-apply plugin: 'yakworks.grails-plugin'
+repositories {
+  //yakworks.grails-plugin adds the repos we need
+  maven { url "http://repo.9ci.com/oss-snapshots" }
+  mavenLocal()
+}
 
 dependencies {
-    profile "org.grails.profiles:web-plugin"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    provided "org.springframework.boot:spring-boot-starter-tomcat"
-    provided "org.grails.plugins:async"
-    provided "org.grails:grails-plugin-services"
-    provided "org.grails:grails-plugin-domain-class"
+  console "org.grails:grails-console"
 
-    compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:$versionHibernate"
-    compile "org.hibernate:hibernate-ehcache:$versionHibernate"
+  compile "org.grails.plugins:spring-security-core:$vSpringSecurity"
+  compile "org.grails.plugins:spring-security-rest:$vSpringSecurityRest"
+  compileOnly "org.grails.plugins:audit-trail:$vPluginAuditTrail"
 
-    compileOnly "org.grails.plugins:audit-trail:$vPluginAuditTrail"
-    //investigate why is this needed - without it some some unit tests fails to find the tables during unit tests
-    testRuntime "org.apache.tomcat:tomcat-jdbc"
+  compileOnly "org.grails.plugins:gorm-tools:$vPluginGormTools"
 
-    //gorm-tools compileOnly so it easier to distribute up the chain, will use the upstream updating soon.
-    compileOnly "org.grails.plugins:gorm-tools:$vPluginGormTools"
-    testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
+  // used for bundled Test traits
+  compileOnly "org.grails:grails-gorm-testing-support"
+  // compileOnly "org.grails:grails-web-testing-support"
+  // compileOnly "org.grails.plugins:build-test-data:$versionBuildTestData"
+  // compileOnly "org.grails.plugins:geb"
+  // compileOnly "org.grails:grails-datastore-rest-client"
+  // compileOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1" // needed for groovydoc
 
 
 }
 
+//bootRepackage and maybe addResources are needed for the test/example projects grails.plugin.compile dependency to work
+bootRun {
+  jvmArgs('-Dspring.output.ansi.enabled=always')
+  addResources = true
+}
 bootRepackage.enabled = false
 
-bootRun {
-    jvmArgs('-Dspring.output.ansi.enabled=always')
-    addResources = true
+test {
+  //testLogging.showStandardStreams = true
+  testLogging.exceptionFormat = 'full'
 }
 
-codenarcIntegrationTest {
-  exclude '**/*'
-  ignoreFailures = true
-}
 
 //SEE README in root project
 compileGroovy {

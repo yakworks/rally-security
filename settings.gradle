@@ -3,8 +3,8 @@ rootProject.name = 'rally-security-root'
 include 'plugin'
 findProject(':plugin').name = 'rally-security'
 
-// include 'examples/app'
-// findProject(':examples/app').name = 'test-app'
+include 'examples/app'
+findProject(':examples/app').name = 'test-app'
 
 // include 'examples/rest-security'
 // findProject(':examples/rest-security').name = 'rest-security'
