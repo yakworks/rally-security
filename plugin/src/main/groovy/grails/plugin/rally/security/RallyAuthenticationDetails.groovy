@@ -7,7 +7,7 @@ package grails.plugin.rally.security
 import javax.servlet.http.HttpServletRequest
 
 import groovy.transform.CompileStatic
-import groovy.util.logging.Log4j
+import groovy.util.logging.Slf4j
 
 import org.springframework.security.web.authentication.WebAuthenticationDetails
 
@@ -24,8 +24,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails
  * @see RallyAuthenticationDetails#authType
  * @see RallyAuthenticationDetails#isAutoLogin
  */
+@Slf4j
 @CompileStatic
-@Log4j
 class RallyAuthenticationDetails extends WebAuthenticationDetails {
 
     public static final String TYPE_FORM = 'form'

@@ -42,6 +42,8 @@ indent_size = 4
 continuation_indent_size = 8
 
 [*.gradle]
+indent_style = space
+indent_size = 2
 
 # python
 [*.py]
