@@ -15,11 +15,6 @@ apply plugin: 'yakworks.shipyak' //our opinionated defaults for gradle groovy & 
 
 subprojects {
 
-  repositories {
-    //yakworks.grails-plugin adds the repos we need
-    maven { url "https://repo.9ci.com/oss-snapshots" }
-  }
-
   plugins.withId('java') {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
@@ -63,9 +58,9 @@ subprojects {
 
       configurations {
         testCompile.extendsFrom compileOnly //includes the compileOnly in tests too so we don't have to list twice
-        // all {
-        //   resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
-        // }
+        all {
+          resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
+        }
       }
 
       //sets the path to sys properties so we can use it find grails-app/conf during AST
@@ -80,20 +75,6 @@ subprojects {
       }
     }
   }
-  // configurations {
-  //   testCompile.extendsFrom compileOnly //includes the compileOnly in tests too so we don't have to list twice
-  //   all {
-  //     resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
-  //   }
-  // }
-
-  //sets the path to sys properties so we can use it find grails-app/conf during AST
-  // plugins.withId('groovy') {
-  //   compileGroovy {
-  //     groovyOptions.fork = true
-  //     groovyOptions.forkOptions.jvmArgs = ['-Dgradle.projectDir=' + project.projectDir.absolutePath]
-  //   }
-  // }
 }
 
 // ext.codenarcRuleset= '''
