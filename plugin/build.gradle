@@ -7,16 +7,22 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     provided "org.springframework.boot:spring-boot-starter-tomcat"
     provided "org.grails.plugins:async"
-
-    compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.2.17.Final"
-    compile "org.hibernate:hibernate-ehcache:5.2.17.Final"
-
-    provided "org.grails.plugins:gorm-tools:6.1.11-v.12"
-    compile "org.grails.plugins:audit-trail:3.0.10"
-
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
+
+    compile "org.grails.plugins:hibernate5"
+    compile "org.hibernate:hibernate-core:$versionHibernate"
+    compile "org.hibernate:hibernate-ehcache:$versionHibernate"
+
+    compileOnly "org.grails.plugins:audit-trail:$vPluginAuditTrail"
+    //investigate why is this needed - without it some some unit tests fails to find the tables during unit tests
+    testRuntime "org.apache.tomcat:tomcat-jdbc"
+
+    //gorm-tools compileOnly so it easier to distribute up the chain, will use the upstream updating soon.
+    compileOnly "org.grails.plugins:gorm-tools:$vPluginGormTools"
+    testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
+
+
 }
 
 bootRepackage.enabled = false
