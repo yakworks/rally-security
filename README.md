@@ -108,7 +108,7 @@ Plugin maintains login history - The associated domains are `SecLoginHistory` wh
 - Plugin provides SecService & UserService which contains common helpers. Check the source for more details.
 
 
-### Testing support
+## Testing support
 
 **SecuritySpecUnitTestHelper**
 
