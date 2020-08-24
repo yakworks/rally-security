@@ -134,3 +134,8 @@ class UserSpec implements SecuritySpecUnitTestHelper {
 **SecuritySpecHelper**
 
 Provides testing support for Integration tests. and provides the `authenticate` method with same signature as above.  
+
+
+### Rest security
+Plugin does not provide any functionality out of the box to enable securing rest APIs. 
+Spring security rest plugin can be used to configure rest security
