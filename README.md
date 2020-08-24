@@ -116,7 +116,7 @@ Provides support for unit tests which needs a logged in user. It registered requ
  authenticate a user.
  
  ```groovy
-class UserSpec implements SecuritySpecUnitTestHelper {}
+class UserSpec implements SecuritySpecUnitTestHelper {
    final private static String  ROLE_USER = "User" 
    final private static String  ROLE_CUSTOMER = "Customer"
 
@@ -127,9 +127,6 @@ class UserSpec implements SecuritySpecUnitTestHelper {}
        when:
           test some thing
    }
-
-
-
 }
 
 ```
