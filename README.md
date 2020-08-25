@@ -255,7 +255,7 @@ curl -H "accept:application/json" -H "Authorization: Bearer TOKEN_VALUE" http://
 This should result in request successfully being authenticated.
 
 See [spring security rest](https://alvarosanchez.github.io/grails-spring-security-rest/2.0.0.M2/docs/index.html#_token_generation)
-plugin documentation for further details on token generation, storage, and other configuration details of spring
- security rest
+plugin documentation for further details on various strategy for token generation, storage, and other configuration
+ details of spring security rest
 
 
