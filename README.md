@@ -229,7 +229,7 @@ curl -H "accept:application/json" http://localhost:8080/api/book
 Response
 
 ```json
-{"status":401,"error":"Unauthorized","message":"No message available","path":"/api/book"}
+{"status":403,"error":"Forbidden","message":"Access Denied","path":"/api/book"}
 ```
 
 ###  Login with API and accessing secured URLs
