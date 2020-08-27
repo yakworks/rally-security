@@ -143,7 +143,6 @@ Spring security rest plugin can be used to configure rest security.
 
 Below is a short example of how to get rest security working.
 
-
 **Install spring security rest plugin**
 
 File: Build.gradle
@@ -185,12 +184,12 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 ``` 
 
+
 In above example, all urls under /api/* will use rest security filter chain, and rest of the urls will use
  traditional form based login.
  
  See [plugin documentation](https://alvarosanchez.github.io/grails-spring-security-rest/2.0.0.M2/docs/index.html#_plugin_configuration)
   for more details
- 
  
 At this point, all urls under /api should be secured, we can verify it by creating a sample rest api
 
@@ -220,7 +219,14 @@ File: UrlMappings.groovy
  "/api/book"(resources: "book")
 ```
 
-At this point, the API should be secured. If we try to access the url api/book we should get unauthorized response.
+### rest-security example
+
+#### Run rest-security example with gradle:
+
+```gradle rest-security:bootRun```
+
+
+Rest-security is configured as above, the API should be secured. If we try to access the url api/book we should get unauthorized response.
 
 ```
 curl -H "accept:application/json" http://localhost:8080/api/book
@@ -232,7 +238,7 @@ Response
 {"status":403,"error":"Forbidden","message":"Access Denied","path":"/api/book"}
 ```
 
-###  Login with API and accessing secured URLs
+####  Login with API and accessing secured URLs
 Default url for login with api is api/login.
 
 ```
@@ -257,5 +263,3 @@ This should result in request successfully being authenticated.
 See [spring security rest](https://alvarosanchez.github.io/grails-spring-security-rest/2.0.0.M2/docs/index.html#_token_generation)
 plugin documentation for further details on various strategy for token generation, storage, and other configuration
  details of spring security rest
-
-
