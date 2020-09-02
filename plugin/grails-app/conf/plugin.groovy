@@ -30,7 +30,7 @@ grails {
                 userService.trackUserLogin()
             }
             rest {
-                token.storage.jwt.secret = 'sWXY3VMm4wKAGoRZg8r3ftZc'
+                token.storage.jwt.secret = 'sWXY3VMm4wKAGoRZg8r3ftZcjrKvmExghY'
             }
         }
     }
